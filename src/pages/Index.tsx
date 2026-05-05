@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ArrowRight,
@@ -45,6 +46,24 @@ const stats = [
 const Index = () => {
   const isMobile = useIsMobile();
   const heroVideoSrc = isMobile ? "/hero-clip-mobile.mp4" : "/hero-clip.mp4";
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    v.addEventListener("loadeddata", tryPlay);
+    const onFirstTouch = () => tryPlay();
+    document.addEventListener("touchstart", onFirstTouch, { once: true, passive: true });
+    document.addEventListener("click", onFirstTouch, { once: true });
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      document.removeEventListener("touchstart", onFirstTouch);
+      document.removeEventListener("click", onFirstTouch);
+    };
+  }, [heroVideoSrc]);
 
   return (
     <>
@@ -52,7 +71,7 @@ const Index = () => {
       <section className="relative min-h-screen flex items-center overflow-hidden pt-20 isolate">
         <div className="absolute inset-0 z-0 bg-background">
           <video
-            key={heroVideoSrc}
+            ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
             src={heroVideoSrc}
             autoPlay
@@ -60,6 +79,8 @@ const Index = () => {
             muted
             playsInline
             preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
             aria-hidden="true"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/20 pointer-events-none" />
