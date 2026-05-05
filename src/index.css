@@ -1,0 +1,236 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* MoonBaek — purple & black gradient theme */
+    --background: 270 30% 4%;
+    --foreground: 280 30% 98%;
+
+    --card: 270 35% 8%;
+    --card-foreground: 280 30% 98%;
+
+    --popover: 270 35% 7%;
+    --popover-foreground: 280 30% 98%;
+
+    /* Vivid purple primary */
+    --primary: 270 91% 65%;
+    --primary-foreground: 270 30% 4%;
+
+    --secondary: 270 25% 12%;
+    --secondary-foreground: 280 30% 98%;
+
+    --muted: 270 20% 14%;
+    --muted-foreground: 275 15% 65%;
+
+    /* Magenta/pink accent for gradient pairing */
+    --accent: 290 85% 60%;
+    --accent-foreground: 280 30% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 280 30% 98%;
+
+    --border: 270 25% 16%;
+    --input: 270 25% 16%;
+    --ring: 270 91% 65%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 270 35% 5%;
+    --sidebar-foreground: 280 25% 90%;
+    --sidebar-primary: 270 91% 65%;
+    --sidebar-primary-foreground: 270 30% 4%;
+    --sidebar-accent: 270 25% 12%;
+    --sidebar-accent-foreground: 280 25% 95%;
+    --sidebar-border: 270 25% 14%;
+    --sidebar-ring: 270 91% 65%;
+
+    /* Brand custom tokens */
+    --glass-bg: 280 30% 98% / 0.04;
+    --glass-border: 280 30% 98% / 0.08;
+    --glass-hover: 280 30% 98% / 0.08;
+    --text-dim: 280 30% 98% / 0.55;
+    --text-soft: 280 30% 98% / 0.78;
+
+    /* Gradients — purple to magenta on black */
+    --gradient-primary: linear-gradient(135deg, hsl(270 91% 65%), hsl(290 85% 60%));
+    --gradient-radial: radial-gradient(ellipse at top, hsl(270 91% 65% / 0.18), transparent 60%);
+    --gradient-hero: linear-gradient(180deg, hsl(270 30% 4% / 0) 0%, hsl(270 30% 4% / 0.4) 60%, hsl(270 30% 4%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(270 35% 8%), hsl(270 35% 5%));
+
+    /* Shadows / glows */
+    --shadow-glow: 0 0 60px hsl(270 91% 65% / 0.3);
+    --shadow-glow-purple: 0 0 80px hsl(290 85% 60% / 0.3);
+    --shadow-elegant: 0 10px 40px -10px hsl(270 91% 65% / 0.4);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background-color: hsl(270 30% 4%);
+    background-image:
+      radial-gradient(ellipse 70% 50% at 50% 0%, hsl(270 91% 55% / 0.40), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 40%, hsl(290 85% 50% / 0.30), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 70%, hsl(270 91% 50% / 0.28), transparent 65%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, hsl(290 85% 45% / 0.22), transparent 60%),
+      linear-gradient(180deg, hsl(270 40% 8%) 0%, hsl(270 35% 5%) 50%, hsl(270 40% 3%) 100%);
+    background-attachment: fixed;
+    background-size: 200% 200%;
+    animation: bg-shift 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes bg-shift {
+    0%   { background-position: 0% 0%, 100% 50%, 0% 50%, 50% 100%, 0 0; }
+    100% { background-position: 25% 15%, 75% 35%, 15% 65%, 60% 85%, 0 0; }
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+}
+
+/* Animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 30px hsl(270 91% 65% / 0.4); }
+  50% { box-shadow: 0 0 80px hsl(290 85% 60% / 0.6); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+@layer utilities {
+  .text-dim { color: hsl(var(--text-dim)); }
+  .text-soft { color: hsl(var(--text-soft)); }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glass-card {
+    @apply bg-[hsl(var(--glass-bg))] border border-[hsl(var(--glass-border))] rounded-xl backdrop-blur-md;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    background: hsl(var(--glass-hover));
+    border-color: hsl(199 89% 58% / 0.3);
+    box-shadow: var(--shadow-elegant);
+    transform: translateY(-2px);
+  }
+
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(210 40% 98% / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(210 40% 98% / 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .label-tracking {
+    @apply text-xs font-semibold uppercase tracking-[0.2em];
+  }
+
+  .btn-primary {
+    background: var(--gradient-primary);
+    @apply text-primary-foreground px-6 py-3 rounded-full font-semibold transition-all duration-300;
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 50px -10px hsl(199 89% 58% / 0.5);
+  }
+
+  .btn-secondary {
+    @apply glass-card px-6 py-3 rounded-full font-semibold text-foreground transition-all duration-300;
+  }
+
+  .btn-secondary:hover {
+    background: hsl(var(--glass-hover));
+    border-color: hsl(199 89% 58% / 0.4);
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.7s ease-out both;
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .grid-animated {
+    animation: grid-move 20s linear infinite;
+  }
+
+  .page-section {
+    @apply py-20 md:py-28 px-6;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+}
