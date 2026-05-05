@@ -17,8 +17,12 @@ dist-ssr
 .env.local
 .env.*.local
 
-# Source media (only the trimmed public/hero-clip.mp4 is committed)
+# Source media (only the optimized clips in public/ are committed)
 /YTDown_*.mp4
+/mobile_landing_video.mp4
+/produt_and_industris_wecando.docx
+/_docx_extract/
+/images/
 
 # Editor directories and files
 .vscode/*

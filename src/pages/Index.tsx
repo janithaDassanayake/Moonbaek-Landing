@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   ArrowRight,
   Brain,
@@ -42,14 +43,18 @@ const stats = [
 ];
 
 const Index = () => {
+  const isMobile = useIsMobile();
+  const heroVideoSrc = isMobile ? "/hero-clip-mobile.mp4" : "/hero-clip.mp4";
+
   return (
     <>
       {/* Hero */}
       <section className="relative min-h-screen flex items-center overflow-hidden pt-20 isolate">
         <div className="absolute inset-0 z-0 bg-background">
           <video
+            key={heroVideoSrc}
             className="absolute inset-0 w-full h-full object-cover"
-            src="/hero-clip.mp4"
+            src={heroVideoSrc}
             autoPlay
             loop
             muted

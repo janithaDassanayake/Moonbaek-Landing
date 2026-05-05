@@ -133,6 +133,13 @@
   100% { background-position: 50px 50px; }
 }
 
+@keyframes industry-scan {
+  0%   { transform: translateX(0); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateX(400%); opacity: 0; }
+}
+
 @layer utilities {
   .text-dim { color: hsl(var(--text-dim)); }
   .text-soft { color: hsl(var(--text-soft)); }
@@ -224,6 +231,10 @@
 
   .grid-animated {
     animation: grid-move 20s linear infinite;
+  }
+
+  .industry-scan {
+    animation: industry-scan 6s ease-in-out infinite;
   }
 
   .page-section {
