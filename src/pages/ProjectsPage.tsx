@@ -169,7 +169,7 @@ function useLazyAutoplay() {
 function DemoVideo({
   src,
   className = "",
-  controls = true,
+  controls = false,
   autoPlay = false,
   loop = true,
   muted = true,
@@ -331,7 +331,7 @@ function VdeSection() {
             <TabsContent key={c.value} value={c.value} className="mt-0">
               <div className="grid lg:grid-cols-3 gap-6 items-start">
                 <div className="lg:col-span-2 relative rounded-xl overflow-hidden border border-border aspect-video bg-black">
-                  <DemoVideo src={c.src} controls autoPlay />
+                  <DemoVideo src={c.src} autoPlay />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-3">{c.label}</h3>
@@ -373,7 +373,7 @@ function AritSection() {
       <div className="container-custom px-6">
         <div className="glass-card p-6 md:p-10 grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 relative rounded-xl overflow-hidden border border-border aspect-video bg-black">
-            <DemoVideo src="/demos/arit/arit.mp4" controls autoPlay />
+            <DemoVideo src="/demos/arit/arit.mp4" autoPlay />
           </div>
           <div className="lg:col-span-5">
             <p className="label-tracking text-primary mb-3">Adaptive Re-Identification</p>
@@ -533,7 +533,7 @@ function SurveillanceSection() {
               className="glass-card-hover overflow-hidden flex flex-col"
             >
               <div className="relative aspect-video bg-black border-b border-border">
-                <DemoVideo src={d.src} controls autoPlay />
+                <DemoVideo src={d.src} autoPlay />
               </div>
               <div className="p-5 md:p-6">
                 <div className="flex items-center gap-3 mb-3">
@@ -602,7 +602,7 @@ function SmallDemosGrid() {
         >
           <div className="relative aspect-video bg-black border-b border-border overflow-hidden">
             {c.media.kind === "video" ? (
-              <DemoVideo src={c.media.src} controls autoPlay />
+              <DemoVideo src={c.media.src} autoPlay />
             ) : (
               <img
                 src={c.media.src}
