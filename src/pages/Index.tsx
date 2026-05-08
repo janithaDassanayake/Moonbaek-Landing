@@ -204,17 +204,38 @@ const Index = () => {
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
+    // iOS strictly checks muted state at play() time
     v.muted = true;
-    const tryPlay = () => v.play().catch(() => {});
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.playsInline = true;
+
+    const tryPlay = () => {
+      // ignore promise rejections (e.g. iOS Low Power Mode); the user can tap to play
+      v.play().catch(() => {});
+    };
+
     tryPlay();
+    v.addEventListener("canplay", tryPlay);
+    v.addEventListener("loadedmetadata", tryPlay);
     v.addEventListener("loadeddata", tryPlay);
+
     const onFirstTouch = () => tryPlay();
     document.addEventListener("touchstart", onFirstTouch, { once: true, passive: true });
     document.addEventListener("click", onFirstTouch, { once: true });
+
+    const onVisible = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
+      v.removeEventListener("canplay", tryPlay);
+      v.removeEventListener("loadedmetadata", tryPlay);
       v.removeEventListener("loadeddata", tryPlay);
       document.removeEventListener("touchstart", onFirstTouch);
       document.removeEventListener("click", onFirstTouch);
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, [heroVideoSrc]);
 
@@ -227,13 +248,16 @@ const Index = () => {
             ref={videoRef}
             className="absolute inset-0 w-full h-full object-cover"
             src={heroVideoSrc}
+            poster={isMobile ? "/hero-clip-mobile-poster.jpg" : "/hero-clip-poster.jpg"}
             autoPlay
             loop
             muted
             playsInline
+            {...{ "webkit-playsinline": "true" }}
             preload="auto"
             disablePictureInPicture
             disableRemotePlayback
+            controls={false}
             aria-hidden="true"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/75 to-background/20 pointer-events-none" />
@@ -253,10 +277,8 @@ const Index = () => {
               <span className="text-soft">MoonBaek · AI That Sees Beyond</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
-              <span className="md:whitespace-nowrap">
-                Engineering <span className="gradient-text">applied AI</span>
-              </span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 whitespace-nowrap">
+              Engineering <span className="gradient-text">applied AI</span>
               <br />
               for the real world.
             </h1>
