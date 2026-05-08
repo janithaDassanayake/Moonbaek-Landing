@@ -285,3 +285,16 @@
     @apply max-w-7xl mx-auto;
   }
 }
+
+/* Hide every native play affordance on demo videos (Safari/iOS/Chrome) */
+.demo-video::-webkit-media-controls,
+.demo-video::-webkit-media-controls-enclosure,
+.demo-video::-webkit-media-controls-panel,
+.demo-video::-webkit-media-controls-overlay-play-button,
+.demo-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

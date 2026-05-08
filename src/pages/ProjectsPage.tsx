@@ -146,56 +146,71 @@ const surveillanceDemos: SurveillanceDemo[] = [
 
 /* ------------------------- Helpers ------------------------- */
 
-function useLazyAutoplay() {
-  const ref = useRef<HTMLVideoElement | null>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) v.play().catch(() => {});
-          else v.pause();
-        }
-      },
-      { threshold: 0.35 },
-    );
-    io.observe(v);
-    return () => io.disconnect();
-  }, []);
-  return ref;
-}
-
 function DemoVideo({
   src,
   className = "",
-  controls = false,
-  autoPlay = false,
-  loop = true,
-  muted = true,
   poster,
 }: {
   src: string;
   className?: string;
-  controls?: boolean;
-  autoPlay?: boolean;
-  loop?: boolean;
-  muted?: boolean;
   poster?: string;
 }) {
-  const lazyRef = useLazyAutoplay();
+  const ref = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+
+    tryPlay();
+
+    const onPause = () => {
+      if (!v.ended) tryPlay();
+    };
+    const onVisible = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+
+    v.addEventListener("loadedmetadata", tryPlay);
+    v.addEventListener("canplay", tryPlay);
+    v.addEventListener("pause", onPause);
+    document.addEventListener("visibilitychange", onVisible);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) if (e.isIntersecting) tryPlay();
+      },
+      { threshold: 0.05 },
+    );
+    io.observe(v);
+
+    return () => {
+      v.removeEventListener("loadedmetadata", tryPlay);
+      v.removeEventListener("canplay", tryPlay);
+      v.removeEventListener("pause", onPause);
+      document.removeEventListener("visibilitychange", onVisible);
+      io.disconnect();
+    };
+  }, [src]);
+
   return (
     <video
-      ref={autoPlay ? lazyRef : undefined}
+      ref={ref}
       src={src}
       poster={poster}
-      controls={controls}
-      autoPlay={autoPlay}
-      muted={muted}
-      loop={loop}
+      autoPlay
+      muted
+      loop
       playsInline
-      preload="metadata"
-      className={`w-full h-full object-cover ${className}`}
+      preload="auto"
+      controls={false}
+      disablePictureInPicture
+      controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
+      className={`demo-video w-full h-full object-cover pointer-events-none ${className}`}
     />
   );
 }
@@ -331,7 +346,7 @@ function VdeSection() {
             <TabsContent key={c.value} value={c.value} className="mt-0">
               <div className="grid lg:grid-cols-3 gap-6 items-start">
                 <div className="lg:col-span-2 relative rounded-xl overflow-hidden border border-border aspect-video bg-black">
-                  <DemoVideo src={c.src} autoPlay />
+                  <DemoVideo src={c.src} />
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold mb-3">{c.label}</h3>
@@ -373,7 +388,7 @@ function AritSection() {
       <div className="container-custom px-6">
         <div className="glass-card p-6 md:p-10 grid lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7 relative rounded-xl overflow-hidden border border-border aspect-video bg-black">
-            <DemoVideo src="/demos/arit/arit.mp4" autoPlay />
+            <DemoVideo src="/demos/arit/arit.mp4" />
           </div>
           <div className="lg:col-span-5">
             <p className="label-tracking text-primary mb-3">Adaptive Re-Identification</p>
@@ -533,7 +548,7 @@ function SurveillanceSection() {
               className="glass-card-hover overflow-hidden flex flex-col"
             >
               <div className="relative aspect-video bg-black border-b border-border">
-                <DemoVideo src={d.src} autoPlay />
+                <DemoVideo src={d.src} />
               </div>
               <div className="p-5 md:p-6">
                 <div className="flex items-center gap-3 mb-3">
@@ -602,7 +617,7 @@ function SmallDemosGrid() {
         >
           <div className="relative aspect-video bg-black border-b border-border overflow-hidden">
             {c.media.kind === "video" ? (
-              <DemoVideo src={c.media.src} autoPlay />
+              <DemoVideo src={c.media.src} />
             ) : (
               <img
                 src={c.media.src}
