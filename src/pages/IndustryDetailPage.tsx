@@ -245,17 +245,18 @@ function ApplicationCard({ app, index }: { app: IndustryApplication; index: numb
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.45, delay: (index % 6) * 0.04 }}
-      className="glass-card-hover overflow-hidden flex flex-col group"
+      className="glass-card-hover overflow-hidden flex flex-col group app-card"
     >
       <div className="relative h-44 overflow-hidden border-b border-border">
         <img
           src={app.image}
           alt={app.title}
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          loading={index < 3 ? "eager" : "lazy"}
+          decoding="async"
+          className="app-card-img absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 mix-blend-overlay opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-90" />
       </div>
       <div className="p-5 flex flex-col flex-1">
         <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">

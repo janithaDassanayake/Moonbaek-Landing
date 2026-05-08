@@ -52,7 +52,7 @@ export default function IndustriesPage() {
             >
               <Link
                 to={`/industries/${ind.slug}`}
-                className="glass-card-hover overflow-hidden group flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-xl"
+                className="glass-card-hover overflow-hidden group flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-xl app-card"
               >
                 <IndustryHero industry={ind} index={i} />
 
@@ -94,11 +94,12 @@ function IndustryHero({ industry, index }: { industry: Industry; index: number }
       <img
         src={industry.image}
         alt={industry.name}
-        loading="lazy"
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        loading={index < 3 ? "eager" : "lazy"}
+        decoding="async"
+        className="app-card-img absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-110"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 mix-blend-overlay opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-90" />
 
       <div className="absolute top-3 left-3 px-2 py-1 rounded-full text-[10px] font-mono bg-background/70 backdrop-blur border border-primary/30 text-soft">
         #{String(index + 1).padStart(2, "0")}

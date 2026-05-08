@@ -467,17 +467,18 @@ export default function VisionBaekPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.45, delay: (i % 6) * 0.04 }}
-                className="glass-card-hover overflow-hidden group flex flex-col"
+                className="glass-card-hover overflow-hidden group flex flex-col app-card"
               >
                 <div className="relative h-44 overflow-hidden border-b border-border">
                   <img
                     src={app.image}
                     alt={app.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    loading={i < 6 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="app-card-img absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out md:group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-accent/15 mix-blend-overlay opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-90" />
 
                   {/* priority rank badge */}
                   <div className="absolute top-3 left-3 px-2 py-1 rounded-full text-[10px] font-mono bg-background/70 backdrop-blur border border-primary/30 text-soft">

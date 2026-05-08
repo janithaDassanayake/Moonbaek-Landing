@@ -252,6 +252,26 @@
     animation-play-state: paused;
   }
 
+  /* iOS Safari scroll smoothing for image cards.
+     Promotes each card and its image onto its own GPU layer so scrolling
+     does not trigger costly repaints, and avoids the mix-blend-mode +
+     backdrop-filter combinations that force software rendering on iOS. */
+  .app-card {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    contain: layout paint;
+  }
+
+  .app-card-img {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+
   .marquee-mask {
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);

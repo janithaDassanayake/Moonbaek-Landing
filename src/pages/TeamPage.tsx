@@ -11,8 +11,8 @@ type Member = {
 
 const team: Member[] = [
   {
-    name: "Janitha Prathapa",
-    role: "Founder & Vision AI Specialist",
+    name: "Meka Janitha Prathapa",
+    role: "Co-Founder, CEO & Vision AI Specialist",
     skills: ["Artificial Intelligence", "Computer Vision", "ML & Deep Learning", "VLMs"],
     photo: "/team/prathapa.jpeg",
     linkedin: "https://www.linkedin.com/in/janitha-prathapa-0b147b1b0/",

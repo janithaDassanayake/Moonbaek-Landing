@@ -277,7 +277,7 @@ const Index = () => {
               <span className="text-soft">MoonBaek · AI That Sees Beyond</span>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 whitespace-nowrap">
+            <h1 className="text-[2rem] leading-[1.1] sm:text-4xl sm:leading-[1.05] md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 whitespace-nowrap">
               Engineering <span className="gradient-text">applied AI</span>
               <br />
               for the real world.
