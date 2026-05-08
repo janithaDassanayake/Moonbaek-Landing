@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Solutions", to: "/solutions" },
-  { label: "Projects", to: "/projects" },
+  { label: "Services", to: "/services" },
+  { label: "Applications", to: "/applications" },
+  { label: "Demos", to: "/demos" },
   { label: "Industries", to: "/industries" },
-  { label: "Publications", to: "/publications" },
   { label: "Team", to: "/team" },
   { label: "Contact", to: "/contact" },
 ];

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -16,32 +16,185 @@ import {
   ShieldCheck,
   Boxes,
   Plane,
+  Layers,
+  Workflow,
+  Zap,
+  type LucideIcon,
 } from "lucide-react";
+import {
+  SiPython,
+  SiTypescript,
+  SiJavascript,
+  SiReact,
+  SiNodedotjs,
+  SiFastapi,
+  SiPytorch,
+  SiTensorflow,
+  SiKeras,
+  SiOpencv,
+  SiHuggingface,
+  SiOnnx,
+  SiNvidia,
+  SiDocker,
+  SiKubernetes,
+  SiCloudflare,
+  SiTerraform,
+  SiGooglecloud,
+  SiPostgresql,
+  SiSupabase,
+  SiRedis,
+  SiMongodb,
+  SiGit,
+  SiGithub,
+  SiLinux,
+  SiVercel,
+  SiTailwindcss,
+  SiVite,
+  SiThreedotjs,
+} from "react-icons/si";
+import type { IconType } from "react-icons";
+
+/* ---------- Products ---------- */
+
+type Product = {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+  href: string;
+  cta: string;
+  accent: "primary" | "accent";
+};
+
+const products: Product[] = [
+  {
+    icon: Eye,
+    title: "VisionBaek",
+    desc: "42 production-grade computer vision applications you can deploy on existing camera infrastructure, from defect detection to crowd safety.",
+    href: "/applications",
+    cta: "Browse 42 applications",
+    accent: "primary",
+  },
+  {
+    icon: Layers,
+    title: "Vision Dynamics Engine (VDE)",
+    desc: "Our unified runtime that fuses detection, tracking, segmentation, pose, and re-ID into one engine. Five live capability cuts to explore.",
+    href: "/demos#vde",
+    cta: "See VDE in motion",
+    accent: "primary",
+  },
+  {
+    icon: Workflow,
+    title: "Adaptive Re-ID Tracking",
+    desc: "Identity-preserving tracking that survives occlusion, motion blur, and frame drops via temporal memory of each subject.",
+    href: "/demos#arit",
+    cta: "Watch ARIT demo",
+    accent: "primary",
+  },
+  {
+    icon: Database,
+    title: "SynthBaek",
+    desc: "Diffusion-powered synthetic data pipeline for clinical, veterinary, and industrial domains, when real data is scarce or sensitive.",
+    href: "/demos#synthbaek",
+    cta: "Explore SynthBaek",
+    accent: "accent",
+  },
+];
+
+/* ---------- Capabilities ---------- */
 
 const capabilities = [
   { icon: Sparkles, title: "Generative AI", desc: "Custom LLMs, RAG systems, and content generation pipelines tailored to your domain." },
   { icon: Bot, title: "Agentic AI", desc: "Autonomous agents that plan, reason, and execute multi-step workflows end-to-end." },
-  { icon: Eye, title: "Computer Vision", desc: "Detection, tracking, OCR, and scene understanding for real-world environments." },
+  { icon: Eye, title: "Computer Vision", desc: "Detection, tracking, segmentation, OCR, and scene understanding for the real world." },
   { icon: Brain, title: "Machine Learning", desc: "Predictive models, forecasting, and decision systems built on production-grade MLOps." },
   { icon: Cpu, title: "Deep Learning", desc: "Custom neural architectures for the hardest perception and reasoning problems." },
-  { icon: Database, title: "SynthBaek", desc: "Proprietary synthetic data framework for when real-world data is scarce or sensitive." },
+  { icon: Zap, title: "Edge & Real-Time", desc: "Sub-50ms inference pipelines on edge accelerators, GPUs, and on-prem hardware." },
 ];
+
+/* ---------- Industries ---------- */
 
 const industries = [
   { icon: Truck, name: "Transportation" },
   { icon: Boxes, name: "Logistics" },
-  { icon: Plane, name: "Shipping" },
+  { icon: Plane, name: "Aerial & Drones" },
   { icon: ShoppingBag, name: "Retail" },
   { icon: HeartPulse, name: "Healthcare" },
   { icon: ShieldCheck, name: "Surveillance" },
 ];
 
+/* ---------- Stats ---------- */
+
 const stats = [
-  { value: "15+", label: "Projects delivered" },
-  { value: "10+", label: "Research publications" },
+  { value: "42", label: "Vision applications" },
+  { value: "20+", label: "Live demos" },
   { value: "8", label: "Industries served" },
-  { value: "5", label: "Core AI disciplines" },
+  { value: "<50ms", label: "Edge inference" },
 ];
+
+/* ---------- Tech stack ---------- */
+
+type TechItem = { icon: IconType; name: string; color: string };
+
+// Two flat rows for the infinite marquee, split for visual variety, not categorization.
+const techRowA: TechItem[] = [
+  { icon: SiPython, name: "Python", color: "#3776AB" },
+  { icon: SiPytorch, name: "PyTorch", color: "#EE4C2C" },
+  { icon: SiTensorflow, name: "TensorFlow", color: "#FF6F00" },
+  { icon: SiKeras, name: "Keras", color: "#D00000" },
+  { icon: SiOpencv, name: "OpenCV", color: "#5C3EE8" },
+  { icon: SiHuggingface, name: "Hugging Face", color: "#FFD21E" },
+  { icon: SiOnnx, name: "ONNX", color: "#005CED" },
+  { icon: SiNvidia, name: "NVIDIA / CUDA", color: "#76B900" },
+  { icon: SiFastapi, name: "FastAPI", color: "#009688" },
+  { icon: SiNodedotjs, name: "Node.js", color: "#339933" },
+  { icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+  { icon: SiJavascript, name: "JavaScript", color: "#F7DF1E" },
+  { icon: SiReact, name: "React", color: "#61DAFB" },
+  { icon: SiThreedotjs, name: "Three.js", color: "#cccccc" },
+];
+
+const techRowB: TechItem[] = [
+  { icon: SiDocker, name: "Docker", color: "#2496ED" },
+  { icon: SiKubernetes, name: "Kubernetes", color: "#326CE5" },
+  { icon: SiTerraform, name: "Terraform", color: "#7B42BC" },
+  { icon: SiGooglecloud, name: "GCP", color: "#4285F4" },
+  { icon: SiCloudflare, name: "Cloudflare", color: "#F38020" },
+  { icon: SiVercel, name: "Vercel", color: "#ffffff" },
+  { icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
+  { icon: SiSupabase, name: "Supabase", color: "#3ECF8E" },
+  { icon: SiMongodb, name: "MongoDB", color: "#47A248" },
+  { icon: SiRedis, name: "Redis", color: "#DC382D" },
+  { icon: SiLinux, name: "Linux", color: "#FCC624" },
+  { icon: SiGit, name: "Git", color: "#F05032" },
+  { icon: SiGithub, name: "GitHub", color: "#ffffff" },
+  { icon: SiVite, name: "Vite", color: "#646CFF" },
+  { icon: SiTailwindcss, name: "Tailwind", color: "#06B6D4" },
+];
+
+function TechMarquee({ items, durationSec }: { items: TechItem[]; durationSec: number }) {
+  // Duplicate the list once so the marquee can seamlessly wrap from right to left.
+  const doubled = [...items, ...items];
+  return (
+    <div className="marquee-mask overflow-hidden">
+      <div className="marquee-track gap-3" style={{ animationDuration: `${durationSec}s` }}>
+        {doubled.map((t, i) => (
+          <div
+            key={`${t.name}-${i}`}
+            className="shrink-0 inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full border border-border bg-secondary/30 hover:bg-secondary/50 hover:border-primary/30 transition-colors"
+            title={t.name}
+          >
+            <t.icon className="w-5 h-5 shrink-0" style={{ color: t.color }} aria-hidden="true" />
+            <span className="text-sm font-medium text-foreground/90 whitespace-nowrap">
+              {t.name}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Page ---------- */
 
 const Index = () => {
   const isMobile = useIsMobile();
@@ -97,27 +250,29 @@ const Index = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 glass-card text-xs font-mono mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="text-soft">AI-driven solutions company</span>
+              <span className="text-soft">MoonBaek · AI That Sees Beyond</span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] mb-6">
-              Engineering <span className="gradient-text">applied AI</span>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6">
+              <span className="md:whitespace-nowrap">
+                Engineering <span className="gradient-text">applied AI</span>
+              </span>
               <br />
               for the real world.
             </h1>
 
             <p className="text-lg md:text-xl text-soft max-w-2xl leading-relaxed mb-10">
-              MoonBaek builds production-grade Generative AI, Agentic AI, Computer Vision,
-              and Deep Learning systems for transportation, logistics, retail, healthcare,
-              and beyond.
+              MoonBaek ships production-grade computer vision and synthetic data systems,
+              powered by VisionBaek, SynthBaek, and our Vision Dynamics Engine, across
+              transportation, healthcare, retail, manufacturing, and beyond.
             </p>
 
             <div className="flex flex-wrap items-center gap-4">
-              <Link to="/solutions" className="btn-primary inline-flex items-center gap-2">
-                Explore solutions <ArrowRight className="w-4 h-4" />
+              <Link to="/applications" className="btn-primary inline-flex items-center gap-2">
+                Browse 42 applications <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/projects" className="btn-secondary">
-                View projects
+              <Link to="/demos" className="btn-secondary">
+                Watch live demos
               </Link>
             </div>
           </motion.div>
@@ -136,10 +291,59 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Capabilities */}
-      <section className="page-section">
+      {/* Products */}
+      <section className="px-6 py-16 md:py-20">
         <div className="container-custom">
-          <div className="max-w-2xl mb-14">
+          <div className="max-w-2xl mb-10">
+            <p className="label-tracking text-primary mb-4">Our products</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Tools we built so the <span className="gradient-text">work ships faster</span>.
+            </h2>
+            <p className="text-soft text-lg">
+              Four flagship products that anchor every engagement, from camera feed to
+              decision, from scarce data to robust models.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {products.map((p, i) => (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="glass-card-hover p-7 group flex flex-col"
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div
+                    className={`w-12 h-12 rounded-xl border flex items-center justify-center group-hover:scale-110 transition-transform ${
+                      p.accent === "primary"
+                        ? "bg-gradient-to-br from-primary/30 to-accent/30 border-primary/40"
+                        : "bg-gradient-to-br from-accent/30 to-primary/30 border-accent/40"
+                    }`}
+                  >
+                    <p.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-2xl font-semibold">{p.title}</h3>
+                </div>
+                <p className="text-soft leading-relaxed mb-5 flex-1">{p.desc}</p>
+                <Link
+                  to={p.href}
+                  className="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all"
+                >
+                  {p.cta} <ArrowRight className="w-4 h-4" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section className="px-6 pb-16 md:pb-20">
+        <div className="container-custom">
+          <div className="max-w-2xl mb-10">
             <p className="label-tracking text-primary mb-4">Capabilities</p>
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               End-to-end AI, from research to production.
@@ -156,7 +360,7 @@ const Index = () => {
                 key={c.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
+                viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="glass-card-hover p-6 group"
               >
@@ -171,12 +375,31 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Tech stack, infinite marquee */}
+      <section className="px-6 pb-16 md:pb-20">
+        <div className="container-custom">
+          <div className="max-w-2xl mb-8">
+            <p className="label-tracking text-primary mb-4">Tech stack</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              The toolbox behind the <span className="gradient-text">work</span>.
+            </h2>
+            <p className="text-soft text-lg">
+              Languages, ML frameworks, infra, flowing through every shipment.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <TechMarquee items={techRowA} durationSec={50} />
+            <TechMarquee items={techRowB} durationSec={60} />
+          </div>
+        </div>
+      </section>
+
       {/* Industries strip */}
-      <section className="page-section pt-0">
+      <section className="px-6 pb-16 md:pb-20">
         <div className="container-custom">
           <div className="glass-card p-10 md:p-14 relative overflow-hidden">
-            <div className="absolute inset-0 -z-10 opacity-50"
-              style={{ background: "var(--gradient-radial)" }} />
+            <div className="absolute inset-0 -z-10 opacity-50" style={{ background: "var(--gradient-radial)" }} />
             <div className="grid lg:grid-cols-3 gap-10 items-center">
               <div className="lg:col-span-1">
                 <p className="label-tracking text-primary mb-4">Industries</p>
@@ -184,16 +407,22 @@ const Index = () => {
                   Tailored to your vertical.
                 </h2>
                 <p className="text-soft mb-6">
-                  Dedicated playbooks for each industry — built around the workflows,
+                  Dedicated playbooks for each industry, built around the workflows,
                   data, and constraints that actually matter on the ground.
                 </p>
-                <Link to="/industries" className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all">
+                <Link
+                  to="/industries"
+                  className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all"
+                >
                   See all industries <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
               <div className="lg:col-span-2 grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {industries.map((ind) => (
-                  <div key={ind.name} className="flex items-center gap-3 p-4 rounded-lg bg-secondary/40 border border-border hover:border-primary/40 transition-colors">
+                  <div
+                    key={ind.name}
+                    className="flex items-center gap-3 p-4 rounded-lg bg-secondary/40 border border-border hover:border-primary/40 transition-colors"
+                  >
                     <ind.icon className="w-5 h-5 text-primary" />
                     <span className="text-sm font-medium">{ind.name}</span>
                   </div>
@@ -204,29 +433,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* SynthBaek callout */}
-      <section className="page-section pt-0">
+      {/* Demos teaser */}
+      <section className="px-6 pb-16 md:pb-20">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 gap-10 items-center glass-card p-10 md:p-14 gradient-border">
             <div>
-              <p className="label-tracking text-accent mb-4">Proprietary Framework</p>
+              <p className="label-tracking text-accent mb-4">Live demos</p>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Meet <span className="gradient-text">SynthBaek</span>.
+                See the models <span className="gradient-text">actually running</span>.
               </h2>
-              <p className="text-soft leading-relaxed mb-4">
-                When real-world data is limited, biased, or sensitive, SynthBaek generates
-                high-fidelity synthetic datasets that close the gap — enabling robust,
-                privacy-preserving models that scale.
+              <p className="text-soft leading-relaxed mb-5">
+                Skip the slideshow. Twenty-plus rendered clips from VDE, ARIT,
+                SynthBaek, and our surveillance suite, running on real footage.
               </p>
-              <p className="text-dim text-sm font-mono">
-                Domain randomization · simulation pipelines · diffusion-based augmentation
-              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/demos#vde" className="btn-primary inline-flex items-center gap-2 text-sm">
+                  VDE demos <ArrowRight className="w-4 h-4" />
+                </Link>
+                <Link to="/demos#synthbaek" className="btn-secondary text-sm">
+                  SynthBaek samples
+                </Link>
+                <Link to="/demos#samples" className="btn-secondary text-sm">
+                  Domain samples
+                </Link>
+              </div>
             </div>
             <div className="relative h-64 rounded-xl overflow-hidden border border-border">
               <div className="absolute inset-0 grid-bg grid-animated" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-accent blur-2xl opacity-60 animate-pulse-glow" />
-                <div className="absolute font-mono text-sm text-soft">{`> synthbaek --generate`}</div>
+                <div className="absolute font-mono text-sm text-soft">{`> visionbaek --play`}</div>
               </div>
             </div>
           </div>
@@ -234,7 +470,7 @@ const Index = () => {
       </section>
 
       {/* CTA */}
-      <section className="page-section">
+      <section className="px-6 py-16 md:py-20">
         <div className="container-custom text-center max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-bold mb-5">
             Have an AI problem worth solving?

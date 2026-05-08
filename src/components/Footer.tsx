@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { Linkedin, Twitter, Github, Mail } from "lucide-react";
 
 export function Footer() {
@@ -17,7 +17,7 @@ export function Footer() {
             </Link>
             <p className="mt-4 text-soft text-sm max-w-md leading-relaxed">
               AI-driven solutions across Generative AI, Agentic AI, Computer Vision,
-              Machine Learning, and Deep Learning. Powered by SynthBaek — our proprietary
+              Machine Learning, and Deep Learning. Powered by SynthBaek, our proprietary
               synthetic data framework.
             </p>
             <div className="flex items-center gap-3 mt-6">
@@ -37,7 +37,7 @@ export function Footer() {
             <h4 className="label-tracking text-soft mb-4">Explore</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/solutions" className="text-soft hover:text-foreground transition-colors">Solutions</Link></li>
-              <li><Link to="/projects" className="text-soft hover:text-foreground transition-colors">Projects</Link></li>
+              <li><Link to="/demos" className="text-soft hover:text-foreground transition-colors">Demos</Link></li>
               <li><Link to="/industries" className="text-soft hover:text-foreground transition-colors">Industries</Link></li>
               <li><Link to="/publications" className="text-soft hover:text-foreground transition-colors">Publications</Link></li>
             </ul>
@@ -48,7 +48,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm">
               <li><Link to="/team" className="text-soft hover:text-foreground transition-colors">Team</Link></li>
               <li><Link to="/contact" className="text-soft hover:text-foreground transition-colors">Contact</Link></li>
-              <li><a href="mailto:hello@moonbaek.ai" className="text-soft hover:text-foreground transition-colors">hello@moonbaek.ai</a></li>
+              <li><a href="mailto:hello@moonbaek.com" className="text-soft hover:text-foreground transition-colors">hello@moonbaek.com</a></li>
             </ul>
           </div>
         </div>

@@ -140,6 +140,11 @@
   100% { transform: translateX(400%); opacity: 0; }
 }
 
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @layer utilities {
   .text-dim { color: hsl(var(--text-dim)); }
   .text-soft { color: hsl(var(--text-soft)); }
@@ -235,6 +240,21 @@
 
   .industry-scan {
     animation: industry-scan 6s ease-in-out infinite;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-rtl 45s linear infinite;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
   }
 
   .page-section {

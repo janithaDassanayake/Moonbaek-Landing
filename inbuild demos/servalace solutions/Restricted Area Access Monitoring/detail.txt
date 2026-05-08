@@ -1,0 +1,5 @@
+This system allows users to customize any selected location as an unauthorized area. Once the area is marked, the system can track and monitor whether a person, animal, pet, or any object enters or trespasses into that restricted zone.
+
+In this demo, we show a sample of how the restricted area can be customized smoothly and at a micro level. If someone or something crosses the selected boundary, the system can detect the trespassing activity and trigger an alert or alarm.
+
+This approach is flexible and can be adapted to different real-world solutions, such as security monitoring, pet tracking, workplace safety, and restricted-area surveillance.
