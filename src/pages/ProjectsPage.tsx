@@ -21,6 +21,13 @@ type VdeClip = { value: string; label: string; src: string; caption: string };
 
 const vdeClips: VdeClip[] = [
   {
+    value: "keypoints",
+    label: "Keypoints & Pose",
+    src: "/demos/vde/keypoints.mp4",
+    caption:
+      "Skeletal keypoint extraction for pose, biomechanics, and movement-quality scoring.",
+  },
+  {
     value: "detection",
     label: "Detection",
     src: "/demos/vde/detection.mp4",
@@ -33,13 +40,6 @@ const vdeClips: VdeClip[] = [
     src: "/demos/vde/tracking.mp4",
     caption:
       "Identity-preserving multi-object tracking across motion, scale change, and partial occlusion.",
-  },
-  {
-    value: "keypoints",
-    label: "Keypoints & Pose",
-    src: "/demos/vde/keypoints.mp4",
-    caption:
-      "Skeletal keypoint extraction for pose, biomechanics, and movement-quality scoring.",
   },
   {
     value: "instance",
@@ -243,11 +243,11 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* VDE, flagship */}
-      <VdeSection />
-
       {/* ARIT */}
       <AritSection />
+
+      {/* VDE, flagship */}
+      <VdeSection />
 
       {/* SynthBaek */}
       <SynthSection />
@@ -314,7 +314,7 @@ function VdeSection() {
           </div>
         </div>
 
-        <Tabs defaultValue="detection" className="glass-card p-4 md:p-6">
+        <Tabs defaultValue="keypoints" className="glass-card p-4 md:p-6">
           <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 bg-transparent h-auto p-0 mb-5">
             {vdeClips.map((c) => (
               <TabsTrigger
