@@ -15,6 +15,14 @@ import {
   CheckCircle2,
   type LucideIcon,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+
+const WHATSAPP_NUMBER = "94719513803";
+const WHATSAPP_PREFILL =
+  "Hi MoonBaek team, I'd like to chat about a computer-vision project.";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+  WHATSAPP_PREFILL,
+)}`;
 import {
   Form,
   FormControl,
@@ -360,11 +368,36 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <WhatsAppFab />
     </>
   );
 }
 
 /* ----------------------------- Pieces ----------------------------- */
+
+function WhatsAppFab() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Chat with us on WhatsApp, let's build something useful"
+      className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 group inline-flex items-center gap-3 pl-2 pr-5 py-2 rounded-full bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.45)] hover:bg-[#1ebe5d] hover:scale-[1.03] transition-all duration-200"
+    >
+      <span className="relative flex items-center justify-center w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/15">
+        <span className="absolute inset-0 rounded-full bg-white/20 animate-ping" />
+        <FaWhatsapp className="relative w-6 h-6 md:w-7 md:h-7" />
+      </span>
+      <span className="text-sm md:text-base font-semibold leading-tight">
+        Let's build
+        <span className="block text-[11px] md:text-xs font-normal opacity-90">
+          something useful
+        </span>
+      </span>
+    </a>
+  );
+}
 
 function InfoTile({
   icon: Icon,
